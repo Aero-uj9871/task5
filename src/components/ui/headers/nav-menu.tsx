@@ -6,8 +6,6 @@ import {
 } from "@/components/ui/navigation-menu";
 
 import { NavLink } from "react-router-dom";
-// import ThemeToggle from "../Themetoggle";
-
 import { Home, BookOpen, User, Castle, WandSparkles, Menu, X } from "lucide-react";
 import { useState } from "react";
 
