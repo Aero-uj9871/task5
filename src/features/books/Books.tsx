@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 // import api from "@/api/api";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBooks } from '@/redux/slices/bookSlice';
+import { fetchBooks } from '@/features/books/bookSlice';
 import { RootState, AppDispatch } from "@/redux/store";
 import BookCard from '@/features/books/ui/BookCard';
 import { useLoading } from '@/components/context/LoadingProvider';

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchHouses } from '@/redux/slices/houseSlice';
+import { fetchHouses } from '@/features/houses/houseSlice';
 import { RootState, AppDispatch } from '@/redux/store';
 import HouseCard from '@/features/houses/ui/HousesCard';
 import { useLoading } from '@/components/context/LoadingProvider';

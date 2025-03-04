@@ -1,9 +1,9 @@
 // src/redux/store.ts
 import { configureStore } from "@reduxjs/toolkit";
-import booksReducer from "@/redux/slices/bookSlice";
-import characterReducer from  "@/redux/slices/characterSlice";
-import spellReducer from "@/redux/slices/spellSlice";
-import houseReducer from "@/redux/slices/houseSlice"
+import booksReducer from "@/features/books/bookSlice";
+import characterReducer from  "@/features/characters/characterSlice";
+import spellReducer from "@/features/spells/spellSlice";
+import houseReducer from "@/features/houses/houseSlice"
 
 
 export const store = configureStore({

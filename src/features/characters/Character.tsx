@@ -1,6 +1,6 @@
 import { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCharacters } from '@/redux/slices/characterSlice';
+import { fetchCharacters } from '@/features/characters/characterSlice';
 import { RootState, AppDispatch } from '@/redux/store';
 // import api from '@/api/api';
 import TabBar from './ui/TabBar';

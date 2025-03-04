@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSpells } from "@/redux/slices/spellSlice";
+import { fetchSpells } from "@/features/spells/spellSlice";
 import { RootState, AppDispatch } from "@/redux/store";
 import { Input } from "@/components/ui/input";
 import SpellsTabBar from "./ui/SpellsTabBar";
