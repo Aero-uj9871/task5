@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "@/api/api";
 
 type Book = {
-//   id:string;
   number: number;
   title: string;
   originalTitle: string;
@@ -15,13 +14,11 @@ type Book = {
 
 interface BookState{
   books: Book[];
-  loading: boolean;
   error: string | null;
 }
 
 const initialState: BookState={
     books:[],
-    loading:false,
     error:null,
 };
 

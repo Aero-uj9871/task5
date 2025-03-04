@@ -13,9 +13,9 @@ const Spells = () => {
     const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
-          startLoading();
-          dispatch(fetchSpells()).finally(stopLoading);
-        }, [dispatch]);
+        startLoading();
+        dispatch(fetchSpells()).finally(stopLoading);
+    }, [dispatch]);
 
     if (error) return <h1 className="text-red-500 text-center">Something Went Wrong</h1>;
 

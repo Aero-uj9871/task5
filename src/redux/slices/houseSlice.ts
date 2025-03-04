@@ -8,43 +8,42 @@ type Houses = {
     colors: string[];
     animal: string;
     index: number;
-
 }
 
-interface HouseState{
-    houses:Houses[];
-    loading:boolean;
-    error:string | null;
+interface HouseState {
+    houses: Houses[];
+
+    error: string | null;
 }
 
-const initialState: HouseState={
-    houses:[],
-    loading:false,
-    error:null,
+const initialState: HouseState = {
+    houses: [],
+
+    error: null,
 };
 
-export const fetchHouses= createAsyncThunk("houses/fetchHouses", async ()=>{
-    const response= await api.get("/houses");
+export const fetchHouses = createAsyncThunk("houses/fetchHouses", async () => {
+    const response = await api.get("/houses");
     return response.data;
 })
 
 
-const houseSlice=createSlice({
+const houseSlice = createSlice({
     name: 'houses',
     initialState,
-     reducers: {}, 
-      extraReducers: (builder) => {
+    reducers: {},
+    extraReducers: (builder) => {
         builder
-          .addCase(fetchHouses.pending, (state) => {
-            state.error = null;
-          })
-          .addCase(fetchHouses.fulfilled, (state, action) => {
-            state.houses = action.payload;
-          })
-          .addCase(fetchHouses.rejected, (state, action) => {
-            state.error = action.error.message || "Something went wrong";
-          });
-      },
+            .addCase(fetchHouses.pending, (state) => {
+                state.error = null;
+            })
+            .addCase(fetchHouses.fulfilled, (state, action) => {
+                state.houses = action.payload;
+            })
+            .addCase(fetchHouses.rejected, (state, action) => {
+                state.error = action.error.message || "Something went wrong";
+            });
+    },
 
 });
 

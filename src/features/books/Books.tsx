@@ -1,4 +1,4 @@
-import { useEffect} from 'react'
+import { useEffect } from 'react'
 // import api from "@/api/api";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBooks } from '@/redux/slices/bookSlice';
@@ -11,12 +11,12 @@ const Books = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { books, error } = useSelector((state: RootState) => state.books);
     const { startLoading, stopLoading } = useLoading();
-  
+
     useEffect(() => {
-      startLoading();
-      dispatch(fetchBooks()).finally(stopLoading);
+        startLoading();
+        dispatch(fetchBooks()).finally(stopLoading);
     }, [dispatch]);
-  
+
 
     if (error) return <h1>Something Went Wrong</h1>
     console.log(books)

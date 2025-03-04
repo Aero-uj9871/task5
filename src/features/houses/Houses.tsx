@@ -11,9 +11,9 @@ const Houses = () => {
     const { startLoading, stopLoading } = useLoading();
 
     useEffect(() => {
-              startLoading();
-              dispatch(fetchHouses()).finally(stopLoading);
-            }, [dispatch]);
+        startLoading();
+        dispatch(fetchHouses()).finally(stopLoading);
+    }, [dispatch]);
 
     if (error) return <h1>Something Went Wrong</h1>;
 
