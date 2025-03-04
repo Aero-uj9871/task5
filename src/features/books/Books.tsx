@@ -1,36 +1,24 @@
-import { useEffect, useState } from 'react'
-import api from "@/api/api";
+import { useEffect} from 'react'
+// import api from "@/api/api";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBooks } from '@/redux/slices/bookSlice';
+import { RootState, AppDispatch } from "@/redux/store";
 import BookCard from '@/features/books/ui/BookCard';
 import { useLoading } from '@/components/context/LoadingProvider';
 
 
 const Books = () => {
+    const dispatch = useDispatch<AppDispatch>();
+    const { books, error } = useSelector((state: RootState) => state.books);
     const { startLoading, stopLoading } = useLoading();
-    const [books, setBooks] = useState([]);
-    const [err, setErr] = useState("");
-
+  
     useEffect(() => {
-        const getBooks = async () => {
-            startLoading();
-            setErr("");
-            try {
-                const bookResponse = await api.get('/books');
-                setBooks(bookResponse.data);
-            } catch (error) {
-                if (error instanceof Error) {
-                    console.log(error.message);
-                } else {
-                    console.log("Unknown error", error);
-                }
-            }finally{
-                stopLoading();
-            }
-        }
+      startLoading();
+      dispatch(fetchBooks()).finally(stopLoading);
+    }, [dispatch]);
+  
 
-        getBooks();
-    }, [])
-
-    if (err) return <h1>Something Went Wrong</h1>
+    if (error) return <h1>Something Went Wrong</h1>
     console.log(books)
     return (
         <section className="w-[95%] mx-auto py-10 px-8 " >

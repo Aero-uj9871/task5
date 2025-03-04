@@ -1,36 +1,51 @@
-import { useEffect, useState } from 'react';
-import api from '@/api/api';
+import { useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCharacters } from '@/redux/slices/characterSlice';
+import { RootState, AppDispatch } from '@/redux/store';
+// import api from '@/api/api';
 import TabBar from './ui/TabBar';
 import { useLoading } from '@/components/context/LoadingProvider';
 
 
 const Characters = () => {
+    const dispatch = useDispatch<AppDispatch>();
+    const {characters, error} = useSelector((state: RootState)=>state.characters);
     const { startLoading, stopLoading } = useLoading();
-    const [characters, setCharacters] = useState([]);
-    const [err, setErr] = useState("");
+
+
 
     useEffect(() => {
-        const getCharacters = async () => {
-            startLoading();
-            setErr("");
-            try {
-                const bookResponse = await api.get('/characters');
-                setCharacters(bookResponse.data);
-            } catch (error) {
-                if (error instanceof Error) {
-                    console.log(error.message);
-                } else {
-                    console.log("Unknown error", error);
-                }
-            } finally {
-                stopLoading();
-            }
-        };
+          startLoading();
+          dispatch(fetchCharacters()).finally(stopLoading);
+        }, [dispatch]);
 
-        getCharacters();
-    }, []);
 
-    if (err) return <h1>Something Went Wrong</h1>;
+
+    // const [characters, setCharacters] = useState([]);
+    // const [err, setErr] = useState("");
+
+    // useEffect(() => {
+    //     const getCharacters = async () => {
+    //         startLoading();
+    //         setErr("");
+    //         try {
+    //             const bookResponse = await api.get('/characters');
+    //             setCharacters(bookResponse.data);
+    //         } catch (error) {
+    //             if (error instanceof Error) {
+    //                 console.log(error.message);
+    //             } else {
+    //                 console.log("Unknown error", error);
+    //             }
+    //         } finally {
+    //             stopLoading();
+    //         }
+    //     };
+
+    //     getCharacters();
+    // }, []);
+
+    if (error) return <h1>Something Went Wrong</h1>;
     console.log(characters);
 
     return (

@@ -1,35 +1,21 @@
-import api from '@/api/api';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchHouses } from '@/redux/slices/houseSlice';
+import { RootState, AppDispatch } from '@/redux/store';
 import HouseCard from '@/features/houses/ui/HousesCard';
 import { useLoading } from '@/components/context/LoadingProvider';
 
 const Houses = () => {
+    const dispatch = useDispatch<AppDispatch>();
+    const { houses, error } = useSelector((state: RootState) => state.houses);
     const { startLoading, stopLoading } = useLoading();
-    const [houses, setHouses] = useState([]);
-    const [err, setErr] = useState("");
 
     useEffect(() => {
-        const getHouses = async () => {
-            startLoading();
-            setErr("");
-            try {
-                const bookResponse = await api.get('/houses');
-                setHouses(bookResponse.data);
-            } catch (error) {
-                if (error instanceof Error) {
-                    console.log(error.message);
-                } else {
-                    console.log("Unknown error", error);
-                }
-            } finally {
-                stopLoading();
-            }
-        };
+              startLoading();
+              dispatch(fetchHouses()).finally(stopLoading);
+            }, [dispatch]);
 
-        getHouses();
-    }, []);
-
-    if (err) return <h1>Something Went Wrong</h1>;
+    if (error) return <h1>Something Went Wrong</h1>;
 
     return (
         <section className="w-[95%] mx-auto py-10 px-8 mb-25">

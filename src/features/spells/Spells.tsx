@@ -1,46 +1,23 @@
-import api from "@/api/api";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSpells } from "@/redux/slices/spellSlice";
+import { RootState, AppDispatch } from "@/redux/store";
 import { Input } from "@/components/ui/input";
 import SpellsTabBar from "./ui/SpellsTabBar";
 import { useLoading } from '@/components/context/LoadingProvider';
 
-
-type SpellType = {
-    spell: string;
-    use: string;
-    index: number;
-};
-
 const Spells = () => {
+    const dispatch = useDispatch<AppDispatch>();
+    const { spells, error } = useSelector((state: RootState) => state.spells);
     const { startLoading, stopLoading } = useLoading();
-    const [spells, setSpells] = useState<SpellType[]>([]);
-    const [err, setErr] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
-        const getSpells = async () => {
-            startLoading();
-            setErr("");
-            try {
-                const response = await api.get("/spells");
-                setSpells(response.data);
-            } catch (error) {
-                if (error instanceof Error) {
-                    console.log(error.message);
-                    setErr(error.message);
-                } else {
-                    console.log("Unknown error", error);
-                    setErr("Something went wrong");
-                }
-            } finally {
-                stopLoading();
-            }
-        };
+          startLoading();
+          dispatch(fetchSpells()).finally(stopLoading);
+        }, [dispatch]);
 
-        getSpells();
-    }, []);
-
-    if (err) return <h1 className="text-red-500 text-center">Something Went Wrong</h1>;
+    if (error) return <h1 className="text-red-500 text-center">Something Went Wrong</h1>;
 
     // Filter spells based on search input
     const filteredSpells = spells.filter((spells) =>

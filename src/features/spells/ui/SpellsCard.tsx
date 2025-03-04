@@ -1,9 +1,9 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { WandSparkles } from "lucide-react"
 type SpellsType = {
-    "spell": string,
-    "use": string,
-    "index": number
+    spell: string,
+    use: string,
+    index: number
 }
 const SpellsCard: React.FC<{ spells: SpellsType }> = ({ spells }) => (
 

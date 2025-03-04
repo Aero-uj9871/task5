@@ -14,7 +14,7 @@ import {
     interpretedBy: string;
     children: string[];
     image: string;
-    birthDate: string;
+    birthdate: string;
     index: number;
   };
 const CharacterCard:React.FC<{character:CharacterType ,index:number}> = ({character,index}) => {

@@ -9,7 +9,7 @@ type CharacterType = {
     interpretedBy: string;
     children: string[];
     image: string;
-    birthDate: string;
+    birthdate: string;
     index: number;
 };
 const TabBar: React.FC<{ characters: CharacterType[] }> = ({ characters }) => {
